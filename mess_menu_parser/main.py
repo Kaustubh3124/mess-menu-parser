@@ -1,26 +1,26 @@
 import pandas as pd
 import json
 
-# File paths
-input_file = "menu.xlsx"  # The provided Excel file
-output_file = "output.json"  # The JSON output file
+
+input_file = "menu.xlsx"  
+output_file = "output.json" 
 
 try:
-    # Load the Excel file
+    
     df = pd.read_excel(input_file)
 
-    # Remove unnecessary values (e.g., "********") and drop empty cells
+   
     df.replace("********", "", inplace=True)
     df.dropna(inplace=True)
 
-    # Convert the data into a structured dictionary
+    
     menu_dict = {}
 
-    for col in df.columns[1:]:  # Skip the first column if it contains time/index
+    for col in df.columns[1:]: 
         day_menu = {
-            "Breakfast": list(df.iloc[0, 1:].dropna()),  # Row 1 → Breakfast
-            "Lunch": list(df.iloc[1, 1:].dropna()),  # Row 2 → Lunch
-            "Dinner": list(df.iloc[2, 1:].dropna())  # Row 3 → Dinner
+            "Breakfast": list(df.iloc[0, 1:].dropna()), 
+            "Lunch": list(df.iloc[1, 1:].dropna()),  
+            "Dinner": list(df.iloc[2, 1:].dropna()) 
         }
         menu_dict[col] = day_menu
 
